@@ -3,84 +3,104 @@ package sprites;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxG;
+import sprites.Bullet;
+import flixel.group.FlxGroup.FlxTypedGroup;
 
 class Ene3 extends FlxSprite
 {
 	
-	private var disp : FlxSprite;
-	private var time : Int;
+	public var bullets:FlxTypedGroup<Bullet>;
 	
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{		
 		super(X, Y, SimpleGraphic);	
-		makeGraphic(16, 16, 0xFF804000);		
+		makeGraphic(16, 16, 0xFF804000);
 			
 	}	
-	//En el state recibe la posicion de la nave y dispara.
-	//El tiempo de disparo lo hace el enemigo o state??
-	public function Disparar(xnave: Int, ynave : Int) 
+	
+	private function Direccion(xnave: Float, ynave : Float) : Int
 	{
-		// 0 izq, 1 izq arriba, 2 arriba, 3 der arriba, 4 derecha, 5 derecha abajo, 6 abajo, 7 izq abajo		
-		if (time % 32 == 0)
-		{
-			disp = new FlxSprite(this.x+8, this.y+8);
-			disp.makeGraphic(10, 2, 0xFF804000);
-			disp.velocity.x = -200;
-			FlxG.state.add(disp);
-			time = 0;
-		}
-		if (disp.alive)
-		{
-			if (xnave <= X + 8 && ynave >= y - 8 && ynave <= y + 24)
+		var dire : Int = 0;
+		// 0 izq, 1 izq arriba, 2 arriba, 3 der arriba, 4 derecha, 5 derecha abajo, 6 abajo, 7 izq abajo
+			if (xnave <= this.x + 8 && ynave >= this.y - 8 && ynave <= this.y + 24)
 			{
-				//0
-				disp.x--;
+				dire = 0; 
 			}
-			else if (xnave <= X + 8 && ynave >= y - 8)
+			else if (xnave <= this.x + 8 && ynave <= this.y - 8)
 			{
-				//1
-				disp.x--;
-				disp.y--;
+				dire = 1;
 			}
-			else if (xnave >= X - 8 && xnave <= X + 24 && ynave <= y - 8)
+			else if (xnave >= this.x - 8 && xnave <= this.x + 24 && ynave <= this.y - 8)
 			{
-				//2
-				disp.y--;
+				dire = 2;
 			}
-			else if (xnave >= X + 24 && ynave >= y - 8)
+			else if (xnave >= this.x + 24 && ynave <= this.y - 8)
 			{
-				//3
-				disp.x++;
-				disp.y--;
+				dire = 3;
 			}
-			else if (xnave >= X + 24 && ynave >= y - 8 && ynave <= y + 24)
+			else if (xnave >= this.x + 24 && ynave >= this.y - 8 && ynave <= this.y + 24)
 			{
-				//4
-				disp.x++;				
+				dire = 4;				
 			}
-			else if (xnave >= X + 8 && ynave <= y + 24)
+			else if (xnave >= this.x + 8 && ynave >= this.y + 24)
 			{
-				//5
-				disp.x++;
-				disp.y++;
+				dire = 5;
 			}
-			else if (xnave >= X - 8 && xnave <= X + 24 && ynave >= y + 24)
+			else if (xnave >= this.x - 8 && xnave <= this.x + 24 && ynave >= this.y + 24)
 			{
-				//6
-				disp.y++;
+				dire = 6;
 			}
-			else if (xnave <= X - 8 && ynave >= y + 24)
+			else if (xnave <= this.x - 8 && ynave >= this.y + 24)
 			{
-				//7
-				disp.x--;
-				disp.y++;
+				dire = 7;
 			}
-		}
-		time++;
+		return dire;
 	}
 	
-	private function DestruirDisp()
+	public function AgregarDisp(xnave: Float, ynave : Float) 
 	{
-		disp.destroy();
+		var newBullet = new Bullet(this.x + 8, this.y + 8, Direccion(xnave, ynave));
+        bullets = new FlxTypedGroup<Bullet>();
+		bullets.add(newBullet);
+		FlxG.state.add(newBullet);
 	}
+	
+	public function Disparar()
+	{
+		for (bullet in bullets)
+		{
+			switch(bullet.direction)
+			{
+				case 0:
+					bullet.x--;
+					break;
+				case 1:
+					bullet.x--;
+					bullet.y--;
+					break;
+				case 2:
+					bullet.y--;
+					break;
+				case 3:
+					bullet.x++;
+					bullet.y--;
+					break;
+				case 4:
+					bullet.x++;
+					break;
+				case 5:
+					bullet.x++;
+					bullet.y++;
+					break;
+				case 6:
+					bullet.y++;
+					break;
+				case 7:
+					bullet.x--;
+					bullet.y++;
+					break;
+			}
+		}
+	}
+	
 }

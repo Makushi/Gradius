@@ -14,6 +14,8 @@ import flixel.math.FlxPoint;
 import sprites.Bullet;
 import sprites.Player;
 
+import sprites.Ene3;//Test
+
 class PlayState extends FlxState
 {
 	private var level:FlxTilemap;
@@ -25,6 +27,8 @@ class PlayState extends FlxState
 	private var scoreText:FlxText;
 	private var highScoreText:FlxText;
 	private var livesCounter:FlxText;
+	
+	private var ene : Ene3;//Test
 	
 	override public function create():Void
 	{
@@ -51,8 +55,13 @@ class PlayState extends FlxState
 		add(highScoreText);
 		livesCounter = new FlxText(10, Reg.ScreenHeight - 20, "Lives : " + Reg.playerLives);
 		add(livesCounter);
+		
+		ene = new Ene3(128,120); //Test
+		add(ene); //Test
 	}
-
+	
+	private var time : Int = 0; //Test
+	
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
@@ -66,6 +75,17 @@ class PlayState extends FlxState
 			PlayerBulletsInCameraBounds();
 			PllayerStageCollision();	
 		}		
+		
+		//Test
+		if (time % 40 == 0)
+		{
+			ene.AgregarDisp(player.x + 8, player.y + 8);			
+			time = 0;
+		}
+		ene.Disparar();
+		time++;
+		//
+		
 	}
 	
 	private function GameOver():Void

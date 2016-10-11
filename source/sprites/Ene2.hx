@@ -3,19 +3,19 @@ package sprites;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxG;
+import flixel.group.FlxGroup.FlxTypedGroup;
 
 class Ene2 extends FlxSprite
 {
 
 	private var patron : Int = 0;
 	private var subaj : Bool = false;
-	private var disp : FlxSprite;
+	public var bullets:FlxTypedGroup<Bullet>;
 	
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{		
 		super(X, Y, SimpleGraphic);	
-		makeGraphic(16, 16, 0xFF804000);		
-			
+		makeGraphic(16, 16, 0xFF804048);
 	}
 
 	public function Movimiento() 
@@ -39,14 +39,10 @@ class Ene2 extends FlxSprite
 	
 	private function AgregarDisp() 
 	{
-		disp = new FlxSprite(this.x+8, this.y+8);
-		disp.makeGraphic(10, 2, 0xFF804000);
-		disp.velocity.x = -200;
-		FlxG.state.add(disp);
+		var newBullet = new Bullet(this.x + 8, this.y + 8, 0);
+        bullets = new FlxTypedGroup<Bullet>();
+		bullets.add(newBullet);
+		FlxG.state.add(newBullet);
 	}
 	
-	private function DestruirDisp()
-	{
-		disp.destroy();
-	}
 }
