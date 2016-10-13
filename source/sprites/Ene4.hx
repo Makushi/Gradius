@@ -15,6 +15,7 @@ class Ene4 extends FlxSprite
 {
 	
 	public var bullets:FlxTypedGroup<Bullet>;
+	public var pointValue:Int = 400;
 	private var firingTimer:FlxTimer;
 	
 	public function new(?X:Float=0, ?Y:Float=0, enemyBullets:FlxTypedGroup<Bullet>) 
@@ -65,32 +66,34 @@ class Ene4 extends FlxSprite
 	
 	public function AgregarDisp(xnave: Float, ynave : Float) 
 	{
-		var newBullet = new Bullet(this.x + 8, this.y + 8, Direccion(xnave, ynave), 100);
-		switch(newBullet.direction)
-			{
-				case 0:
-					newBullet.velocity.x = -100;
-				case 1:
-					newBullet.velocity.x = -100;
-					newBullet.velocity.y = -100;
-				case 2:
-					newBullet.velocity.y = 100;
-				case 3:
-					newBullet.velocity.x = 100;
-					newBullet.velocity.y = -100;
-				case 4:
-					newBullet.velocity.x = 100;
-				case 5:
-					newBullet.velocity.x = 100;
-					newBullet.velocity.y = 100;
-				case 6:
-					newBullet.velocity.y = 100;
-				case 7:
-					newBullet.velocity.x = -100;
-					newBullet.velocity.y = 100;
-			}
-		bullets.add(newBullet);
-		FlxG.state.add(newBullet);
+		if (alive)
+		{
+			var newBullet = new Bullet(this.x + 8, this.y + 8, Direccion(xnave, ynave), 100);
+			switch(newBullet.direction)
+				{
+					case 0:
+						newBullet.velocity.x = -100;
+					case 1:
+						newBullet.velocity.x = -100;
+						newBullet.velocity.y = -100;
+					case 2:
+						newBullet.velocity.y = 100;
+					case 3:
+						newBullet.velocity.x = 100;
+						newBullet.velocity.y = -100;
+					case 4:
+						newBullet.velocity.x = 100;
+					case 5:
+						newBullet.velocity.x = 100;
+						newBullet.velocity.y = 100;
+					case 6:
+						newBullet.velocity.y = 100;
+					case 7:
+						newBullet.velocity.x = -100;
+						newBullet.velocity.y = 100;
+				}
+			bullets.add(newBullet);
+		}
 	}
 	
 	

@@ -11,6 +11,7 @@ class Ene1 extends FlxSprite
 {
 
 	private var patron : Int = 0;
+	public var pointValue:Int = 100;
 	
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{		

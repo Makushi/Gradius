@@ -16,6 +16,7 @@ class Ene3 extends FlxSprite
 
 	private var patron : Int = 0;
 	private var subaj : Bool = false;
+	public var pointValue:Int = 400;
 	public var bullets:FlxTypedGroup<Bullet>;
 	private var firingTimer:FlxTimer;
 	
@@ -58,8 +59,11 @@ class Ene3 extends FlxSprite
 	
 	private function AgregarDisp(Timer:FlxTimer):Void
 	{
-		var newBullet = new Bullet(this.x + 8, this.y + 8, 0, -100);
-		bullets.add(newBullet);
+		if (alive)
+		{
+			var newBullet = new Bullet(this.x + 8, this.y + 8, 0, -100);
+			bullets.add(newBullet);
+		}
 	}
 	
 }
