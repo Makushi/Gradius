@@ -12,16 +12,21 @@ class Ene1 extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{		
 		super(X, Y, SimpleGraphic);	
-		makeGraphic(16, 16, 0xFF8040ff);		
-			
+		makeGraphic(16, 16, 0xFF8040ff);
 	}
 
+	override public function update(elapsed:Float):Void 
+	{
+		super.update(elapsed);
+		Movimiento();
+	}
+	
 	public function Movimiento() 
 	{
 		
 		if (patron >= 224 ) // Final
 		{
-			 this.x+=2;
+			this.x+=2;
 		}
 		else if (patron >= 208)
 		{

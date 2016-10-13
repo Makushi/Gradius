@@ -62,7 +62,7 @@ class Player extends FlxSprite
 	}
 	
 	private function Shoot():Void{
-        var newBullet = new Bullet(this.x + 8, this.y + 8, 1);
+        var newBullet = new Bullet(this.x + 8, this.y + 8, 1, 300);
         bullets.add(newBullet);
     }
 }

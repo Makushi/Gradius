@@ -3,19 +3,22 @@ package sprites;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxG;
-import sprites.Bullet;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.util.FlxTimer;
+import sprites.Bullet;
+
 
 class Ene3 extends FlxSprite
 {
 	
 	public var bullets:FlxTypedGroup<Bullet>;
+	private var firingTimer:FlxTimer;
 	
-	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
+	public function new(?X:Float=0, ?Y:Float=0, enemyBullets:FlxTypedGroup<Bullet>) 
 	{		
-		super(X, Y, SimpleGraphic);	
+		super(X, Y);	
 		makeGraphic(16, 16, 0xFF804000);
-			
+		bullets = enemyBullets;
 	}	
 	
 	private function Direccion(xnave: Float, ynave : Float) : Int
@@ -59,10 +62,8 @@ class Ene3 extends FlxSprite
 	
 	public function AgregarDisp(xnave: Float, ynave : Float) 
 	{
-		var newBullet = new Bullet(this.x + 8, this.y + 8, Direccion(xnave, ynave));
-        bullets = new FlxTypedGroup<Bullet>();
+		var newBullet = new Bullet(this.x + 8, this.y + 8, Direccion(xnave, ynave), 100);
 		bullets.add(newBullet);
-		FlxG.state.add(newBullet);
 	}
 	
 	public function Disparar()
@@ -72,32 +73,43 @@ class Ene3 extends FlxSprite
 			switch(bullet.direction)
 			{
 				case 0:
-					bullet.x--;
+					bullet.velocity.x = -100;
 					break;
 				case 1:
-					bullet.x--;
-					bullet.y--;
+					bullet.velocity.x = -100;
+					bullet.velocity.y = -100;
+					//bullet.x--;
+					//bullet.y--;
 					break;
 				case 2:
-					bullet.y--;
+					bullet.velocity.y = 100;
+					//bullet.y--;
 					break;
 				case 3:
-					bullet.x++;
-					bullet.y--;
+					bullet.velocity.x = 100;
+					bullet.velocity.y = -100;
+					//bullet.x++;
+					//bullet.y--;
 					break;
 				case 4:
-					bullet.x++;
+					bullet.velocity.x = 100;
+					//bullet.x++;
 					break;
 				case 5:
-					bullet.x++;
-					bullet.y++;
+					bullet.velocity.x = 100;
+					bullet.velocity.y = 100;
+					//bullet.x++;
+					//bullet.y++;
 					break;
 				case 6:
-					bullet.y++;
+					bullet.velocity.y = 100;
+					//bullet.y++;
 					break;
 				case 7:
-					bullet.x--;
-					bullet.y++;
+					bullet.velocity.x = -100;
+					bullet.velocity.y = 100;
+					//bullet.x--;
+					//bullet.y++;
 					break;
 			}
 		}

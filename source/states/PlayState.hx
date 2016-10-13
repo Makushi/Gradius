@@ -13,14 +13,18 @@ import flixel.FlxObject;
 import flixel.math.FlxPoint;
 import sprites.Bullet;
 import sprites.Player;
-
+import sprites.Ene1;
+import sprites.Ene2;
 import sprites.Ene3;//Test
+
 
 class PlayState extends FlxState
 {
 	private var level:FlxTilemap;
 	private var player:Player;
 	public var playerBullets:FlxTypedGroup<Bullet>;
+	public var enemyBullets:FlxTypedGroup<Bullet>;
+	public var enemiesType1:FlxTypedGroup<Ene1>;
 	public var screenPositionX:Float = 0;
 	public var screenSpeed:Float = 1;
 	public var scroll:Bool = true;
@@ -34,9 +38,11 @@ class PlayState extends FlxState
 	{
 		super.create();
 
+		enemiesType1 = new FlxTypedGroup<Ene1>();
+		add(enemiesType1);
 		var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.level1__oel);
-		level = loader.loadTilemap(AssetPaths.galleta__png , 16, 16, "estructura");
-		loader.loadEntities(drawEntities, "entidades");
+		level = loader.loadTilemap(AssetPaths.tileset__png , 16, 16, "tiles");
+		loader.loadEntities(drawEntities, "entities");
 		
 		FlxG.camera.setScrollBounds(0, level.width, 0, level.height);
 		FlxG.camera.scroll = new FlxPoint(0,0);
@@ -56,8 +62,8 @@ class PlayState extends FlxState
 		livesCounter = new FlxText(10, Reg.ScreenHeight - 20, "Lives : " + Reg.playerLives);
 		add(livesCounter);
 		
-		ene = new Ene3(128,120); //Test
-		add(ene); //Test
+		//enemyBullets = new FlxTypedGroup<Bullet>();		
+		//add(enemyBullets);
 	}
 	
 	private var time : Int = 0; //Test
@@ -67,25 +73,30 @@ class PlayState extends FlxState
 		super.update(elapsed);
 		FlxG.collide(level, player);
 		FlxG.collide(level, playerBullets);
+		FlxG.collide(level, enemyBullets);
+		FlxG.collide(level, enemyBullets);
 
 		if (player.alive)
 		{
 			CameraMovement();
 			PlayerMovementInCameraBounds();
 			PlayerBulletsInCameraBounds();
+			//EnemyBulletsInCameraBounds();
 			PllayerStageCollision();	
-		}		
-		
-		//Test
-		if (time % 40 == 0)
+			ActivateEnemies();
+			//PllayerEnemyCollision();	
+		}				
+	}
+	
+	private function ActivateEnemies()
+	{
+		for (enemy in enemiesType1)
 		{
-			ene.AgregarDisp(player.x + 8, player.y + 8);			
-			time = 0;
+			if (InCameraBounds(enemy))
+			{
+				enemy.revive();
+			}
 		}
-		ene.Disparar();
-		time++;
-		//
-		
 	}
 	
 	private function GameOver():Void
@@ -106,6 +117,22 @@ class PlayState extends FlxState
 	public function UpdateHighScore():Void
 	{
 		highScoreText.text = "HighScore : " + Reg.highScore;
+	}
+	
+	private function PllayerEnemyCollision():Void
+	{
+		if (FlxG.overlap(enemyBullets, player))
+		{
+			if (Reg.playerLives > 0)
+			{
+				Reg.playerLives--;
+				RestartLevel();
+			}
+			else
+			{
+				GameOver();
+			}
+		}
 	}
 	
 	private function PllayerStageCollision():Void
@@ -158,6 +185,24 @@ class PlayState extends FlxState
 			(bullet.x > (newScroll.x + Reg.ScreenWidth)))
 			{
 				playerBullets.remove(bullet);
+				bullet.destroy();
+			}
+		}
+	}
+	
+	private function EnemyBulletsInCameraBounds():Void
+	{
+		var newScroll = FlxG.camera.scroll;
+	
+		for (bullet in enemyBullets)
+		{
+			bullet.x += screenSpeed;
+
+			if (bullet.isTouching(FlxObject.ANY) ||
+			(bullet.x > (newScroll.x + Reg.ScreenWidth)) ||
+			bullet.x < (newScroll.x))
+			{
+				enemyBullets.remove(bullet);
 				bullet.destroy();
 			}
 		}
@@ -219,6 +264,16 @@ class PlayState extends FlxState
 			player = new Player(X, Y, playerBullets);
 			player.makeGraphic(16, 16, 0xFF00FF00);
 			add(player);
+		}
+		if (entityName == "enemy1")
+		{
+			var X:Float = Std.parseFloat(entityData.get("x"));
+			var Y:Float = Std.parseFloat(entityData.get("y"));
+			
+			var enemy:Ene1;
+			enemy = new Ene1(X, Y);
+			enemy.kill();
+			enemiesType1.add(enemy);
 		}
 	}
 }

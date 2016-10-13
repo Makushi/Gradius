@@ -4,6 +4,8 @@ import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxG;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.util.FlxTimer;
+import sprites.Bullet;
 
 class Ene2 extends FlxSprite
 {
@@ -11,19 +13,28 @@ class Ene2 extends FlxSprite
 	private var patron : Int = 0;
 	private var subaj : Bool = false;
 	public var bullets:FlxTypedGroup<Bullet>;
+	private var firingTimer:FlxTimer;
 	
-	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
+	public function new(?X:Float=0, ?Y:Float=0, enemyBullets:FlxTypedGroup<Bullet>) 
 	{		
-		super(X, Y, SimpleGraphic);	
+		super(X, Y);	
 		makeGraphic(16, 16, 0xFF804048);
+		bullets = enemyBullets;
+		firingTimer = new FlxTimer();
+		firingTimer.start(2, AgregarDisp, 0);
 	}
-
-	public function Movimiento() 
+	
+	override public function update(elapsed:Float):Void 
+	{
+		super.update(elapsed);
+		Movimiento();
+	}
+	
+	public function Movimiento():Void
 	{
 		if (patron % 32 == 0)
 		{
-			subaj = (subaj)?false:true;
-			AgregarDisp();
+			subaj = (subaj) ? false : true;
 		}
 		if (subaj) 
 		{
@@ -37,12 +48,10 @@ class Ene2 extends FlxSprite
 		patron++;
 	}	
 	
-	private function AgregarDisp() 
+	private function AgregarDisp(Timer:FlxTimer):Void
 	{
-		var newBullet = new Bullet(this.x + 8, this.y + 8, 0);
-        bullets = new FlxTypedGroup<Bullet>();
+		var newBullet = new Bullet(this.x + 8, this.y + 8, 0, -100);
 		bullets.add(newBullet);
-		FlxG.state.add(newBullet);
 	}
 	
 }

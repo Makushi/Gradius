@@ -13,13 +13,16 @@ class Bullet extends FlxSprite
 {
 	public var direction:Int;
 	
-	public function new(?X:Float=0, ?Y:Float=0, Direction:Int) 
+	public function new(?X:Float=0, ?Y:Float=0, Direction:Int, Velocity:Int, ?YVelocity:Int) 
 	{
 		super(X, Y);
 		makeGraphic(5, 5);
 		direction = Direction;
-		//Comentado para Test
-		//velocity.x = 300; 
+		velocity.x = Velocity; 
+		if (YVelocity != null)
+		{
+			velocity.y = YVelocity; 
+		}
 	}
 	
 	override public function update(elapsed:Float):Void
