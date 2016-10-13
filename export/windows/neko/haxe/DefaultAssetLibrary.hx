@@ -61,11 +61,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
-		
-		
-		
-		
-		
 		Font.registerFont (__ASSET__flixel_fonts_nokiafc22_ttf);
 		Font.registerFont (__ASSET__flixel_fonts_monsterrat_ttf);
 		
@@ -74,11 +69,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
-		useManifest = true;
-		useManifest = true;
-		useManifest = true;
-		useManifest = true;
-		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -584,11 +574,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
-		
-		
-		
-		
-		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_monsterrat_ttf);
 		
@@ -597,22 +582,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
-		path.set ("assets/data/gradius.oep", "assets/data/gradius.oep");
-		type.set ("assets/data/gradius.oep", AssetType.TEXT);
+		path.set ("assets/data/Hope.oep", "assets/data/Hope.oep");
+		type.set ("assets/data/Hope.oep", AssetType.TEXT);
 		path.set ("assets/data/level1.oel", "assets/data/level1.oel");
 		type.set ("assets/data/level1.oel", AssetType.TEXT);
-		path.set ("assets/images/block.png", "assets/images/block.png");
-		type.set ("assets/images/block.png", AssetType.IMAGE);
-		path.set ("assets/images/colicion2.png", "assets/images/colicion2.png");
-		type.set ("assets/images/colicion2.png", AssetType.IMAGE);
-		path.set ("assets/images/fondo.png", "assets/images/fondo.png");
-		type.set ("assets/images/fondo.png", AssetType.IMAGE);
-		path.set ("assets/images/fondofase2.png", "assets/images/fondofase2.png");
-		type.set ("assets/images/fondofase2.png", AssetType.IMAGE);
-		path.set ("assets/images/galleta vomito.png", "assets/images/galleta vomito.png");
-		type.set ("assets/images/galleta vomito.png", AssetType.IMAGE);
-		path.set ("assets/images/galleta.png", "assets/images/galleta.png");
-		type.set ("assets/images/galleta.png", AssetType.IMAGE);
+		path.set ("assets/images/tileset.png", "assets/images/tileset.png");
+		type.set ("assets/images/tileset.png", AssetType.IMAGE);
 		className.set ("flixel/sounds/beep.ogg", __ASSET__flixel_sounds_beep_ogg);
 		type.set ("flixel/sounds/beep.ogg", AssetType.SOUND);
 		className.set ("flixel/sounds/flixel.ogg", __ASSET__flixel_sounds_flixel_ogg);
@@ -628,28 +603,13 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#elseif html5
 		
 		var id;
-		id = "assets/data/gradius.oep";
+		id = "assets/data/Hope.oep";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
 		id = "assets/data/level1.oel";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
-		id = "assets/images/block.png";
-		path.set (id, id);
-		type.set (id, AssetType.IMAGE);
-		id = "assets/images/colicion2.png";
-		path.set (id, id);
-		type.set (id, AssetType.IMAGE);
-		id = "assets/images/fondo.png";
-		path.set (id, id);
-		type.set (id, AssetType.IMAGE);
-		id = "assets/images/fondofase2.png";
-		path.set (id, id);
-		type.set (id, AssetType.IMAGE);
-		id = "assets/images/galleta vomito.png";
-		path.set (id, id);
-		type.set (id, AssetType.IMAGE);
-		id = "assets/images/galleta.png";
+		id = "assets/images/tileset.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
 		id = "flixel/sounds/beep.ogg";
@@ -689,11 +649,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
-		useManifest = true;
-		useManifest = true;
-		useManifest = true;
-		useManifest = true;
-		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -1433,11 +1388,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
-
-
-
-
-
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends null { }
@@ -1446,11 +1396,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
-
-
-
-
-
 
 
 
