@@ -16,7 +16,7 @@ import sprites.Player;
 import sprites.Ene1;
 import sprites.Ene2;
 import sprites.Ene3;//Test
-
+import sprites.UpBar;
 
 class PlayState extends FlxState
 {
@@ -31,7 +31,7 @@ class PlayState extends FlxState
 	private var scoreText:FlxText;
 	private var highScoreText:FlxText;
 	private var livesCounter:FlxText;
-	
+	private var ub:UpBar;
 	private var ene : Ene3;//Test
 	
 	override public function create():Void
@@ -62,6 +62,9 @@ class PlayState extends FlxState
 		livesCounter = new FlxText(10, Reg.ScreenHeight - 20, "Lives : " + Reg.playerLives);
 		add(livesCounter);
 		
+		ub = new UpBar(64, 2);
+		add(ub);
+		
 		//enemyBullets = new FlxTypedGroup<Bullet>();		
 		//add(enemyBullets);
 	}
@@ -85,7 +88,13 @@ class PlayState extends FlxState
 			PllayerStageCollision();	
 			ActivateEnemies();
 			//PllayerEnemyCollision();	
-		}				
+		}	
+		
+		if (time > 20){
+			time = 0;
+			ub.SwitchUp();
+		}
+		time++;
 	}
 	
 	private function ActivateEnemies()
@@ -224,6 +233,7 @@ class PlayState extends FlxState
 				scoreText.x += screenSpeed;
 				highScoreText.x += screenSpeed;
 				livesCounter.x += screenSpeed;
+				ub.x += screenSpeed;
 			}			
 		}
 	}

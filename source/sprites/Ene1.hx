@@ -3,7 +3,10 @@ package sprites;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 
-
+/**
+ * ...
+ * @author Kasai Takunori
+ */
 class Ene1 extends FlxSprite
 {
 

@@ -7,6 +7,10 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxTimer;
 import sprites.Bullet;
 
+/**
+ * ...
+ * @author Kasai Takunori
+ */
 class Ene3 extends FlxSprite
 {
 

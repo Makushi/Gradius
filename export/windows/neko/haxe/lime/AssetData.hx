@@ -22,6 +22,8 @@ class AssetData {
 			type.set ("assets/data/level1.oel", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/images/tileset.png", "assets/images/tileset.png");
 			type.set ("assets/images/tileset.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/UpBar.png", "assets/images/UpBar.png");
+			type.set ("assets/images/UpBar.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("flixel/sounds/beep.ogg", "flixel/sounds/beep.ogg");
 			type.set ("flixel/sounds/beep.ogg", Reflect.field (AssetType, "sound".toUpperCase ()));
 			path.set ("flixel/sounds/flixel.ogg", "flixel/sounds/flixel.ogg");
