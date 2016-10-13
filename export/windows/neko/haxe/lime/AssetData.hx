@@ -20,6 +20,10 @@ class AssetData {
 			type.set ("assets/data/Hope.oep", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/data/level1.oel", "assets/data/level1.oel");
 			type.set ("assets/data/level1.oel", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/level2.oel", "assets/data/level2.oel");
+			type.set ("assets/data/level2.oel", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/images/bg.png", "assets/images/bg.png");
+			type.set ("assets/images/bg.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/tileset.png", "assets/images/tileset.png");
 			type.set ("assets/images/tileset.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/UpBar.png", "assets/images/UpBar.png");
