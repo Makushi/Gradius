@@ -89,12 +89,6 @@ class PlayState extends FlxState
 			ActivateEnemies();
 			//PllayerEnemyCollision();	
 		}	
-		
-		if (time > 20){
-			time = 0;
-			ub.SwitchUp();
-		}
-		time++;
 	}
 	
 	private function ActivateEnemies()
