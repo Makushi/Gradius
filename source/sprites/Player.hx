@@ -22,6 +22,7 @@ class Player extends FlxSprite
 	public var shield : Bool = false;
 	private var shieldLive : Int = 0;
 	public var op : Optione;
+	private var spriShield : FlxSprite;
 	
 	public function new(?X:Float=0, ?Y:Float=0, playerBullets:FlxTypedGroup<Bullet>) 
 	{
@@ -64,10 +65,11 @@ class Player extends FlxSprite
 			{
 				Shoot();
 			}
-			//Agregue este boton para hacer Test
-			if (FlxG.keys.justPressed.X)
+			
+			if (shield)
 			{
-				CreateOptione();
+				spriShield.x = this.x+8;
+				spriShield.y = this.y;
 			}
 		}
 		if (option){
@@ -116,7 +118,7 @@ class Player extends FlxSprite
 	
 	public function Aceleration(): Void
 	{
-		speed += 1; 
+		speed += 1; 		
 	}
 	
 	public function Reset(): Void
@@ -129,15 +131,27 @@ class Player extends FlxSprite
 	public function ActivateShield(){
 		shieldLive = 3;
 		shield = true;
-		
-		//Cambiar imagen de una animacion
+		spriShield = new FlxSprite();
+		spriShield.velocity.x = this.velocity.x;
+		spriShield.loadGraphic(AssetPaths.Shield__png, true, 16, 16);
+		spriShield.animation.add("Shi3", [0], 5, false);
+		spriShield.animation.add("Shi2", [1], 5, false);
+		spriShield.animation.add("Shi1", [2], 5, false);
+		FlxG.state.add(spriShield);
+		spriShield.animation.play("Shi3");
 	}
 	
 	public function SubstractShield(){
 		shieldLive--;
-		if (shieldLive == 0){
-			shield = false;
-			//Desactivar imagen de animacion 
+		switch(shieldLive)
+		{
+			case 0:
+				shield = false;
+				spriShield.destroy();
+			case 1:
+				spriShield.animation.play("Shi1");
+			case 2:
+				spriShield.animation.play("Shi2");
 		}
 	}
 	
