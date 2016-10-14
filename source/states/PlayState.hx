@@ -42,7 +42,6 @@ class PlayState extends FlxState
 	private var highScoreText:FlxText;
 	private var livesCounter:FlxText;
 	private var turretFireTimer:FlxTimer;
-	//private var ub:UpBar;
 	
 	override public function create():Void
 	{
@@ -76,7 +75,6 @@ class PlayState extends FlxState
 		loader.loadEntities(drawEntities, "entities");
 		
 		FlxG.camera.setScrollBounds(0, mapTiles.width, 0, mapTiles.height);
-		//FlxG.camera.scroll = new FlxPoint(0, 0);
 		FlxG.camera.scroll = new FlxPoint(player.x,player.y);
 		scroll = true;
 		
