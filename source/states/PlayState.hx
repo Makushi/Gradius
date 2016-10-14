@@ -12,6 +12,7 @@ import flixel.tile.FlxTilemap;
 import flixel.FlxObject;
 import flixel.math.FlxPoint;
 import flixel.util.FlxTimer;
+import flixel.system.FlxSound;
 import sprites.Boss;
 import sprites.Bullet;
 import sprites.Player;
@@ -42,11 +43,13 @@ class PlayState extends FlxState
 	private var highScoreText:FlxText;
 	private var livesCounter:FlxText;
 	private var turretFireTimer:FlxTimer;
+	private var themeSong:FlxSound;
 	
 	override public function create():Void
 	{
 		super.create();
-		
+		themeSong = FlxG.sound.load(AssetPaths.ThemeSong__wav, 1, true);
+		themeSong.play();
 		var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.level2__oel);
 		
 		mapTiles = loader.loadTilemap(AssetPaths.tileset__png , 16, 16, "tiles");

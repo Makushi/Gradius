@@ -16,6 +16,7 @@ class Player extends FlxSprite
 {
 	public var speed:Int = Reg.playerSpeed;
 	private var speedBkUp:Int = Reg.playerSpeed;
+	private var bulletSound:FlxSound;
 	public var bullets:FlxTypedGroup<Bullet>;
 	public var missile : Bool = false;
 	public var option : Bool = false;
@@ -29,6 +30,7 @@ class Player extends FlxSprite
 		super(X, Y);
 		loadGraphic(AssetPaths.Nave__png,false,16,16);
 		bullets = playerBullets;
+		bulletSound = FlxG.sound.load(AssetPaths.Shoot__wav);
 	}
 	
 	override public function update(elapsed:Float):Void 
@@ -145,6 +147,7 @@ class Player extends FlxSprite
 			var newBulletO = new Bullet(op.x + 2, op.y + 2, 1, 300);
 			bullets.add(newBulletO);
 		}
+		bulletSound.play();
     }
 	
 	public function Aceleration(): Void
