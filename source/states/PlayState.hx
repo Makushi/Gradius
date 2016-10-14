@@ -20,6 +20,7 @@ import sprites.Ene2;
 import sprites.Ene3;
 import sprites.Ene4;
 import sprites.UpBar;
+import sprites.Item;
 
 class PlayState extends FlxState
 {
@@ -41,6 +42,7 @@ class PlayState extends FlxState
 	private var livesCounter:FlxText;
 	private var turretFireTimer:FlxTimer;
 	private var ub:UpBar;
+	private var items : FlxTypedGroup<Item>;
 	
 	override public function create():Void
 	{
@@ -244,6 +246,7 @@ class PlayState extends FlxState
 			var bullet: Dynamic = cast(Sprite1, Bullet);
 			var enemy: Dynamic = cast(Sprite2, Ene1);
 			
+			DropItem(enemy.x, enemy.y);			
 			Reg.score += enemy.pointValue;
 			UpdateScore();
 			enemiesType1.remove(enemy);
@@ -258,6 +261,7 @@ class PlayState extends FlxState
 			var bullet: Dynamic = cast(Sprite1, Bullet);
 			var enemy: Dynamic = cast(Sprite2, Ene2);
 			
+			DropItem(enemy.x, enemy.y);			
 			Reg.score += enemy.pointValue;
 			UpdateScore();
 			enemiesType2.remove(enemy);
@@ -272,6 +276,7 @@ class PlayState extends FlxState
 			var bullet: Dynamic = cast(Sprite1, Bullet);
 			var enemy: Dynamic = cast(Sprite2, Ene3);
 			
+			DropItem(enemy.x, enemy.y);
 			Reg.score += enemy.pointValue;
 			UpdateScore();
 			enemiesType3.remove(enemy);
@@ -286,6 +291,7 @@ class PlayState extends FlxState
 			var bullet: Dynamic = cast(Sprite1, Bullet);
 			var enemy: Dynamic = cast(Sprite2, Ene4);
 			
+			DropItem(enemy.x, enemy.y);
 			Reg.score += enemy.pointValue;
 			UpdateScore();
 			enemiesType4.remove(enemy);
@@ -307,6 +313,16 @@ class PlayState extends FlxState
 		}
 		
 		return false;
+	}
+	
+	private function DropItem(ex : Int, ey : Int)
+	{
+		var r : Float = Math.random();
+		if (r < 0.3)
+		{
+			var it : Item = new Item(ex, ey);			
+			add(it);
+		}
 	}
 	
 	private function PllayerStageCollision():Void
