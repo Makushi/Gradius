@@ -351,12 +351,11 @@ class PlayState extends FlxState
 	private function DropItem(ex : Int, ey : Int)
 	{
 		var r : Float = Math.random();
-		//if (r < 0.3)
-		//{
+		if (r < 0.3)
+		{
 			var it : Item = new Item(ex, ey);			
-			powerUps.add(it);
-			//add(it);
-		//}
+			powerUps.add(it);		
+		}
 	}
 	
 	private function PllayerStageCollision():Void
