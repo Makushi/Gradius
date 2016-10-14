@@ -94,17 +94,17 @@ class PlayState extends FlxState
 		turretFireTimer.start(2, TurretsFire, 0);
 		Reg.playerCoords = new FlxPoint(player.x, player.y);
 		
-		//mapTiles.setTileProperties(1, FlxObject.ANY);
-		//mapTiles.setTileProperties(2, FlxObject.ANY);
-		//mapTiles.setTileProperties(3, FlxObject.ANY);
-		//mapTiles.setTileProperties(4, FlxObject.ANY);
-		//mapTiles.setTileProperties(5, FlxObject.ANY);
-		//mapTiles.setTileProperties(6, FlxObject.ANY);
-		//mapTiles.setTileProperties(7, FlxObject.ANY);
-		//mapTiles.setTileProperties(8, FlxObject.ANY);
-		//mapTiles.setTileProperties(9, FlxObject.ANY);
-		//mapTiles.setTileProperties(10, FlxObject.ANY);
-		//mapTiles.setTileProperties(11, FlxObject.ANY);
+		mapTiles.setTileProperties(1, FlxObject.ANY);
+		mapTiles.setTileProperties(2, FlxObject.ANY);
+		mapTiles.setTileProperties(3, FlxObject.ANY);
+		mapTiles.setTileProperties(4, FlxObject.ANY);
+		mapTiles.setTileProperties(5, FlxObject.ANY);
+		mapTiles.setTileProperties(6, FlxObject.ANY);
+		mapTiles.setTileProperties(7, FlxObject.ANY);
+		mapTiles.setTileProperties(8, FlxObject.ANY);
+		mapTiles.setTileProperties(9, FlxObject.ANY);
+		mapTiles.setTileProperties(10, FlxObject.ANY);
+		mapTiles.setTileProperties(11, FlxObject.ANY);
 		
 
 	}
@@ -123,7 +123,6 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		mapTiles.setTileProperties(1, FlxObject.ANY);
 
 		FlxG.collide(mapTiles, player);
 		FlxG.collide(mapTiles, playerBullets);
@@ -493,6 +492,7 @@ class PlayState extends FlxState
 			add(playerBullets);
 			
 			player = new Player(X, Y, playerBullets);
+			player.velocity.x = 0.01;
 			add(player);
 		}
 
