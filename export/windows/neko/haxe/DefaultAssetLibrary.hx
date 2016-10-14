@@ -638,8 +638,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/data/level2.oel", AssetType.TEXT);
 		path.set ("assets/images/bg.png", "assets/images/bg.png");
 		type.set ("assets/images/bg.png", AssetType.IMAGE);
-		path.set ("assets/images/Bullet.png", "assets/images/Bullet.png");
-		type.set ("assets/images/Bullet.png", AssetType.IMAGE);
+		path.set ("assets/images/BulletMultiDire.png", "assets/images/BulletMultiDire.png");
+		type.set ("assets/images/BulletMultiDire.png", AssetType.IMAGE);
 		path.set ("assets/images/Ene1.png", "assets/images/Ene1.png");
 		type.set ("assets/images/Ene1.png", AssetType.IMAGE);
 		path.set ("assets/images/Ene2.png", "assets/images/Ene2.png");
@@ -693,7 +693,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/images/bg.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
-		id = "assets/images/Bullet.png";
+		id = "assets/images/BulletMultiDire.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
 		id = "assets/images/Ene1.png";
