@@ -4,6 +4,8 @@ import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxG;
 import flixel.FlxObject;
+import flixel.math.FlxVelocity;
+import flixel.math.FlxPoint;
 
 /**
  * ...

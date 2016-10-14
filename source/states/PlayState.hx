@@ -11,6 +11,7 @@ import flixel.addons.editors.ogmo.FlxOgmoLoader;
 import flixel.tile.FlxTilemap;
 import flixel.FlxObject;
 import flixel.math.FlxPoint;
+import flixel.util.FlxTimer;
 import sprites.Boss;
 import sprites.Bullet;
 import sprites.Player;
@@ -38,6 +39,7 @@ class PlayState extends FlxState
 	private var scoreText:FlxText;
 	private var highScoreText:FlxText;
 	private var livesCounter:FlxText;
+	private var turretFireTimer:FlxTimer;
 	private var ub:UpBar;
 	
 	override public function create():Void
@@ -70,7 +72,8 @@ class PlayState extends FlxState
 		loader.loadEntities(drawEntities, "entities");
 		
 		FlxG.camera.setScrollBounds(0, mapTiles.width, 0, mapTiles.height);
-		FlxG.camera.scroll = new FlxPoint(0,0);
+		//FlxG.camera.scroll = new FlxPoint(0, 0);
+		FlxG.camera.scroll = new FlxPoint(player.x,player.y);
 		scroll = true;
 		
 		FlxG.worldBounds.set(0, 0, mapTiles.width, mapTiles.height);
@@ -84,13 +87,42 @@ class PlayState extends FlxState
 		
 		ub = new UpBar(64, 2);
 		add(ub);
+
+		turretFireTimer = new FlxTimer();
+		turretFireTimer.start(2, TurretsFire, 0);
+		Reg.playerCoords = new FlxPoint(player.x, player.y);
+		
+		//mapTiles.setTileProperties(1, FlxObject.ANY);
+		//mapTiles.setTileProperties(2, FlxObject.ANY);
+		//mapTiles.setTileProperties(3, FlxObject.ANY);
+		//mapTiles.setTileProperties(4, FlxObject.ANY);
+		//mapTiles.setTileProperties(5, FlxObject.ANY);
+		//mapTiles.setTileProperties(6, FlxObject.ANY);
+		//mapTiles.setTileProperties(7, FlxObject.ANY);
+		//mapTiles.setTileProperties(8, FlxObject.ANY);
+		//mapTiles.setTileProperties(9, FlxObject.ANY);
+		//mapTiles.setTileProperties(10, FlxObject.ANY);
+		//mapTiles.setTileProperties(11, FlxObject.ANY);
+		
+
 	}
-	
-	private var time : Int = 0; //Test
+		
+	private function TurretsFire(Timer:FlxTimer):Void
+	{
+		for (enemy in enemiesType4)
+		{
+			if (enemy.alive && InCameraBounds(enemy))
+			{
+				enemy.AgregarDisp(player.x, player.y);
+			}
+		}
+	}
 	
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
+		mapTiles.setTileProperties(1, FlxObject.ANY);
+
 		FlxG.collide(mapTiles, player);
 		FlxG.collide(mapTiles, playerBullets);
 		FlxG.collide(mapTiles, enemyBullets);
@@ -105,7 +137,10 @@ class PlayState extends FlxState
 			ActivateEnemies();
 			EnemiesInCamera();
 			Collisions();	
-		}	
+		}
+		
+		//Reg.playerCoords.x = player.x;
+		//Reg.playerCoords.y = player.y;
 	}
 	
 	private function ActivateEnemies()
@@ -141,16 +176,11 @@ class PlayState extends FlxState
 				enemy.revive();
 			}
 		}
-		
-		if (InCameraBounds(boss))
-		{
-			boss.revive();
-		}
 	}
 	
-	private function GameOver():Void
+	private function GameOver(victory:Bool):Void
 	{
-		FlxG.switchState(new GameOverState());
+		FlxG.switchState(new GameOverState(victory));
 	}
 	
 	private function RestartLevel():Void
@@ -204,7 +234,7 @@ class PlayState extends FlxState
 			}
 			else
 			{
-				GameOver();
+				GameOver(false);
 			}
 
 			return true;
@@ -290,7 +320,7 @@ class PlayState extends FlxState
 			}
 			else
 			{
-				GameOver();
+				GameOver(false);
 			}
 		}
 	}
@@ -356,6 +386,10 @@ class PlayState extends FlxState
 			if (newScroll.x + 256 >= mapTiles.width)
 			{
 				scroll = false;
+				boss.revive();
+				add(boss.hpBar);		
+				var hpBarText:FlxText = new FlxText(boss.x - 80, boss.y + 168, "BOSS");
+				add(hpBarText);
 			}
 			else
 			{

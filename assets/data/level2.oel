@@ -45,7 +45,5 @@
     <enemy2 id="13" x="1248" y="96" />
     <boss id="14" x="7552" y="32" />
     <player id="0" x="16" y="112" />
-    <enemy3 id="15" x="1520" y="96" />
-    <enemy4 id="16" x="1712" y="144" />
   </entities>
 </level>
