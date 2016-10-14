@@ -5,7 +5,7 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 
 /**
  * ...
- * @author ...
+ * @author Takunori Kasai
  */
 class Item extends FlxSprite
 {

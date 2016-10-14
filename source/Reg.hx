@@ -1,6 +1,7 @@
 package;
 
 import flixel.math.FlxPoint;
+import sprites.UpBar;
 /**
  * ...
  * @author Maximiliano Viñas Craba
@@ -16,4 +17,6 @@ class Reg
 	public static var playerX:Float;
 	public static var playerY:Float;
 	public static var playerCoords:FlxPoint;
+	public static var currentPowerUp:Int;
+	public static var ub:UpBar;
 }

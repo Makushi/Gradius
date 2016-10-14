@@ -34,6 +34,7 @@ class PlayState extends FlxState
 	public var enemiesType3:FlxTypedGroup<Ene3>;
 	public var enemiesType4:FlxTypedGroup<Ene4>;
 	public var boss:Boss;
+	public var powerUps:FlxTypedGroup<Item>;
 	public var screenPositionX:Float = 0;
 	public var screenSpeed:Float = 1;
 	public var scroll:Bool = true;
@@ -41,8 +42,7 @@ class PlayState extends FlxState
 	private var highScoreText:FlxText;
 	private var livesCounter:FlxText;
 	private var turretFireTimer:FlxTimer;
-	private var ub:UpBar;
-	private var items : FlxTypedGroup<Item>;
+	//private var ub:UpBar;
 	
 	override public function create():Void
 	{
@@ -70,6 +70,8 @@ class PlayState extends FlxState
 		enemiesType4 = new FlxTypedGroup<Ene4>();
 		add(enemiesType4);
 		
+		powerUps = new FlxTypedGroup<Item>();
+		add(powerUps);
 		
 		loader.loadEntities(drawEntities, "entities");
 		
@@ -87,8 +89,8 @@ class PlayState extends FlxState
 		livesCounter = new FlxText(10, Reg.ScreenHeight - 20, " Lives : " + Reg.playerLives);
 		add(livesCounter);
 		
-		ub = new UpBar(64, 2);
-		add(ub);
+		Reg.ub = new UpBar(64, 2);
+		add(Reg.ub);
 
 		turretFireTimer = new FlxTimer();
 		turretFireTimer.start(2, TurretsFire, 0);
@@ -217,6 +219,7 @@ class PlayState extends FlxState
 		FlxG.overlap(player, enemiesType4, null, CollsionHandler);
 		FlxG.overlap(player, boss, null, CollsionHandler);
 		FlxG.overlap(player, enemyBullets, null, CollsionHandler);
+		FlxG.overlap(player, powerUps, null, CollsionHandler);
 	}
 	
 	private function CollsionHandler(Sprite1:FlxObject, Sprite2:FlxObject):Bool
@@ -226,7 +229,7 @@ class PlayState extends FlxState
 		if (sprite1ClassName == "sprites.Player" &&
 		(sprite2ClassName == "sprites.Ene1" || sprite2ClassName == "sprites.Ene2" ||
 		sprite2ClassName == "sprites.Ene3" || sprite2ClassName == "sprites.Ene4" ||
-		sprite2ClassName == "sprites.Boss" || sprite2ClassName == "sprites.Bullet"))
+		sprite2ClassName == "sprites.Boss"))
 		{
 			if (Reg.playerLives > 0)
 			{
@@ -236,6 +239,31 @@ class PlayState extends FlxState
 			else
 			{
 				GameOver(false);
+			}
+
+			return true;
+		}
+		
+		if (sprite1ClassName == "sprites.Player" && sprite2ClassName == "sprites.Bullet")
+		{			
+			var bullet: Dynamic = cast(Sprite2, Bullet);
+		
+			if (player.shield == true)
+			{
+				enemyBullets.remove(bullet);
+				player.SubstractShield();				
+			}
+			else
+			{
+				if (Reg.playerLives > 0)
+				{
+					Reg.playerLives--;
+					RestartLevel();
+				}
+				else
+				{
+					GameOver(false);
+				}
 			}
 
 			return true;
@@ -311,17 +339,26 @@ class PlayState extends FlxState
 			return true;
 		}
 		
+		if (sprite1ClassName == "sprites.Player" && sprite2ClassName == "sprites.Item"){
+			var powerUp: Dynamic = cast(Sprite2, Item);
+			Reg.ub.SwitchUp();
+			powerUps.remove(powerUp);
+			powerUp.destroy();
+			return true;
+		}
+		
 		return false;
 	}
 	
 	private function DropItem(ex : Int, ey : Int)
 	{
 		var r : Float = Math.random();
-		if (r < 0.3)
-		{
+		//if (r < 0.3)
+		//{
 			var it : Item = new Item(ex, ey);			
-			add(it);
-		}
+			powerUps.add(it);
+			//add(it);
+		//}
 	}
 	
 	private function PllayerStageCollision():Void
@@ -414,7 +451,7 @@ class PlayState extends FlxState
 				scoreText.x += screenSpeed;
 				highScoreText.x += screenSpeed;
 				livesCounter.x += screenSpeed;
-				ub.x += screenSpeed;
+				Reg.ub.x += screenSpeed;
 			}			
 		}
 	}

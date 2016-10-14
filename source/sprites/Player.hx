@@ -66,6 +66,37 @@ class Player extends FlxSprite
 				Shoot();
 			}
 			
+			if (FlxG.keys.justPressed.X)
+			{
+				if (Reg.ub.upNumber != 0)
+				{
+					switch(Reg.ub.upNumber)
+					{
+						case 1:
+							Aceleration();
+							Reg.ub.Reset();
+						case 2:
+							if (missile == false)
+							{
+								missile = true;
+								Reg.ub.Reset();
+							}
+						case 3:
+							if (shield == false)
+							{
+								ActivateShield();
+								Reg.ub.Reset();
+							}
+						case 4:
+							if (option == false)
+							{
+								CreateOptione();
+								Reg.ub.Reset();
+							}
+					}
+				}
+			}
+			
 			if (shield)
 			{
 				spriShield.x = this.x+8;
