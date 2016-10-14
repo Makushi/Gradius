@@ -114,5 +114,6 @@
     <enemy3 id="47" x="5904" y="32" />
     <enemy3 id="48" x="5872" y="32" />
     <player id="0" x="16" y="112" />
+    <enemy4 id="84" x="128" y="96" />
   </entities>
 </level>
