@@ -18,13 +18,28 @@ class Bullet extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, Direction:Int, Velocity:Int, ?YVelocity:Int) 
 	{
 		super(X, Y);
-		makeGraphic(5, 5);
+		
 		direction = Direction;
 		velocity.x = Velocity; 
 		if (YVelocity != null)
 		{
+			loadGraphic(AssetPaths.Missile__png, false, 16, 16);
 			velocity.y = YVelocity; 
 		}
+		else{
+			loadGraphic(AssetPaths.Bullet__png, true, 11, 5);
+			animation.add("BullP", [0], 5, false);
+			animation.add("BullE", [1], 5, false);
+			if (Velocity > 0)
+			{	
+				animation.play("BullP");
+			}
+			else
+			{
+				animation.play("BullE");	
+			}	
+		}
+		
 	}
 	
 	override public function update(elapsed:Float):Void

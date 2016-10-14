@@ -23,7 +23,7 @@ class Ene3 extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, enemyBullets:FlxTypedGroup<Bullet>) 
 	{		
 		super(X, Y);	
-		makeGraphic(16, 16, 0xFF804048);
+		loadGraphic(AssetPaths.Ene3__png,false,16,16);
 		velocity.x = 50;
 		bullets = enemyBullets;
 		firingTimer = new FlxTimer();

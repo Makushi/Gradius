@@ -84,7 +84,7 @@ class PlayState extends FlxState
 		add(scoreText);
 		highScoreText = new FlxText(150, Reg.ScreenHeight - 20, "HighScore : " + Reg.highScore);
 		add(highScoreText);
-		livesCounter = new FlxText(10, Reg.ScreenHeight - 20, "Lives : " + Reg.playerLives);
+		livesCounter = new FlxText(10, Reg.ScreenHeight - 20, " Lives : " + Reg.playerLives);
 		add(livesCounter);
 		
 		ub = new UpBar(64, 2);
@@ -493,7 +493,6 @@ class PlayState extends FlxState
 			add(playerBullets);
 			
 			player = new Player(X, Y, playerBullets);
-			player.makeGraphic(16, 16, 0xFF00FF00);
 			add(player);
 		}
 

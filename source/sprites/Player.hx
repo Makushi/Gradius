@@ -26,7 +26,7 @@ class Player extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, playerBullets:FlxTypedGroup<Bullet>) 
 	{
 		super(X, Y);
-		makeGraphic(16, 16);
+		loadGraphic(AssetPaths.Nave__png,false,16,16);
 		bullets = playerBullets;
 	}
 	
@@ -64,6 +64,11 @@ class Player extends FlxSprite
 			{
 				Shoot();
 			}
+			//Agregue este boton para hacer Test
+			if (FlxG.keys.justPressed.X)
+			{
+				CreateOptione();
+			}
 		}
 		if (option){
 			//Mueve al option dependiendo de la posicion player
@@ -99,7 +104,7 @@ class Player extends FlxSprite
         var newBullet = new Bullet(this.x + 8, this.y + 8, 1, 300);
         bullets.add(newBullet);
 		if (missile){
-			var newBulletM = new Bullet(this.x + 8, this.y + 8, 1, 300, 300);
+			var newBulletM = new Bullet(this.x + 8, this.y + 8, 1, 200, 200);
 			bullets.add(newBulletM);
 		}
 		
@@ -124,6 +129,7 @@ class Player extends FlxSprite
 	public function ActivateShield(){
 		shieldLive = 3;
 		shield = true;
+		
 		//Cambiar imagen de una animacion
 	}
 	

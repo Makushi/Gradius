@@ -21,7 +21,7 @@ class Ene4 extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, enemyBullets:FlxTypedGroup<Bullet>) 
 	{		
 		super(X, Y);	
-		makeGraphic(16, 16, 0xFF804000);
+		loadGraphic(AssetPaths.Ene4__png,false,16,16);
 		bullets = enemyBullets;
 	}	
 	

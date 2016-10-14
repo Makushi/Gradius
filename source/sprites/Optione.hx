@@ -15,7 +15,7 @@ class Optione extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0) 
 	{
 		super(X, Y);
-		makeGraphic(8, 8, 0xFF804048);
+		loadGraphic(AssetPaths.Option__png,false,8,8);
 		velocity.x = 60;
 	}
 	
