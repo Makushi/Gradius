@@ -67,7 +67,31 @@ class Player extends FlxSprite
 		}
 		if (option){
 			//Mueve al option dependiendo de la posicion player
-			
+			var dis : Int;
+			dis = Math.round(Math.sqrt(Math.pow(op.x+4 - this.x, 2) + Math.pow(op.y+4 - this.y-8, 2)));
+			if (dis > 18)
+			{
+				if (op.x >= this.x && op.y <= this.y)
+				{
+					op.x -= 2;
+					op.y += 2;
+				}
+				else if (op.x <= this.x && op.y <= this.y)
+				{
+					op.x += 2;
+					op.y += 2;
+				}
+				else if (op.x >= this.x && op.y >= this.y)
+				{
+					op.x -= 2;
+					op.y -= 2;
+				}
+				else if (op.x <= this.x && op.y >= this.y)
+				{
+					op.x += 2;
+					op.y -= 2;
+				}
+			}
 		}
 	}
 	

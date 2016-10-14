@@ -15,7 +15,8 @@ class Optione extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0) 
 	{
 		super(X, Y);
-		makeGraphic(7, 7);
+		makeGraphic(8, 8, 0xFF804048);
+		velocity.x = 60;
 	}
 	
 	override public function update(elapsed:Float):Void
