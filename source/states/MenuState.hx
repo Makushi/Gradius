@@ -15,7 +15,9 @@ class MenuState extends FlxState
 {
 	private var NameTxt:FlxText;
 	private var instructionsTxt:FlxText;
-	private var play:FlxButton;
+	private var playText:FlxText;
+	private var optionPointer:FlxSprite;
+	private var granyan:FlxSprite;
 	
 	override public function create():Void
 	{
@@ -31,15 +33,33 @@ class MenuState extends FlxState
 		instructionsTxt.alignment = CENTER;
 		instructionsTxt.screenCenter(X);
 		add(instructionsTxt);
-
-		play = new FlxButton(0, 0, "Play", Start);
-		play.x = (FlxG.width / 2) - (play.width / 2);
-		play.y = FlxG.height - play.height - 10;
-		add(play);
+	   
+		playText = new FlxText(0, 0, "PLAY");
+		playText.x = (FlxG.width / 2) - (playText.width / 2);
+		playText.y = FlxG.height - playText.height - 10;
+		add(playText);
+		
+		granyan = new FlxSprite();
+		granyan.loadGraphic(AssetPaths.Granyan__png, true, 32, 32);
+		granyan.animation.add("titleAnimation", [0, 1], 5, true);
+		granyan.animation.play("titleAnimation");
+		granyan.x = (FlxG.width / 2) - granyan.width / 2 ;
+		granyan.y = 100;
+		add(granyan);
+		
+		optionPointer = new FlxSprite();
+		optionPointer.loadGraphic(AssetPaths.Nave__png);
+		optionPointer.x = playText.x - optionPointer.width - 5;
+		optionPointer.y = playText.y - 1;
+		add(optionPointer);
 	}
 
 	override public function update(elapsed:Float):Void
 	{
+		if (FlxG.keys.justPressed.ENTER)
+		{
+			Start();
+		}
 		super.update(elapsed);
 	}
 	
@@ -47,7 +67,6 @@ class MenuState extends FlxState
 	{
 		remove(NameTxt);
 		remove(instructionsTxt);
-		remove(play);
 		FlxG.switchState(new PlayState());
 	}
 }

@@ -44,12 +44,14 @@ class PlayState extends FlxState
 	private var livesCounter:FlxText;
 	private var turretFireTimer:FlxTimer;
 	private var themeSong:FlxSound;
+	private var powerUpSound:FlxSound;
 	
 	override public function create():Void
 	{
 		super.create();
 		themeSong = FlxG.sound.load(AssetPaths.ThemeSong__wav, 1, true);
 		themeSong.play();
+		powerUpSound = FlxG.sound.load(AssetPaths.Powerup__wav);
 		var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.level2__oel);
 		
 		mapTiles = loader.loadTilemap(AssetPaths.tileset__png , 16, 16, "tiles");
@@ -345,6 +347,7 @@ class PlayState extends FlxState
 			Reg.ub.SwitchUp();
 			powerUps.remove(powerUp);
 			powerUp.destroy();
+			powerUpSound.play();
 			return true;
 		}
 		

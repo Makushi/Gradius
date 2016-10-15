@@ -17,6 +17,7 @@ class Player extends FlxSprite
 	public var speed:Int = Reg.playerSpeed;
 	private var speedBkUp:Int = Reg.playerSpeed;
 	private var bulletSound:FlxSound;
+	private var powerUpActivationSound:FlxSound;
 	public var bullets:FlxTypedGroup<Bullet>;
 	public var missile : Bool = false;
 	public var option : Bool = false;
@@ -24,6 +25,7 @@ class Player extends FlxSprite
 	private var shieldLive : Int = 0;
 	public var op : Optione;
 	private var spriShield : FlxSprite;
+	private var shootInterval:Int = 0;
 	
 	public function new(?X:Float=0, ?Y:Float=0, playerBullets:FlxTypedGroup<Bullet>) 
 	{
@@ -31,12 +33,14 @@ class Player extends FlxSprite
 		loadGraphic(AssetPaths.Nave__png,false,16,16);
 		bullets = playerBullets;
 		bulletSound = FlxG.sound.load(AssetPaths.Shoot__wav);
+		powerUpActivationSound = FlxG.sound.load(AssetPaths.ActivatePowerUp__wav);
 	}
 	
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
 		Movement();
+		shootInterval++;
 	}
 	
 	public function Movement():Void 
@@ -65,7 +69,11 @@ class Player extends FlxSprite
 			
 			if (FlxG.keys.justPressed.Z)
 			{
-				Shoot();
+				if (shootInterval > 30)
+				{
+					Shoot();
+					shootInterval = 0;
+				}
 			}
 			
 			if (FlxG.keys.justPressed.X)
@@ -77,23 +85,27 @@ class Player extends FlxSprite
 						case 1:
 							Aceleration();
 							Reg.ub.Reset();
+							powerUpActivationSound.play();
 						case 2:
 							if (missile == false)
 							{
 								missile = true;
 								Reg.ub.Reset();
+								powerUpActivationSound.play();
 							}
 						case 3:
 							if (shield == false)
 							{
 								ActivateShield();
 								Reg.ub.Reset();
+								powerUpActivationSound.play();
 							}
 						case 4:
 							if (option == false)
 							{
 								CreateOptione();
 								Reg.ub.Reset();
+								powerUpActivationSound.play();
 							}
 					}
 				}

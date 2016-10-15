@@ -12,7 +12,7 @@ import flixel.system.FlxSound;
 
 /**
  * ...
- * @author ...
+ * @author Maximiliano Viñas Craba
  */
 class GameOverState extends FlxState
 {	
@@ -20,10 +20,11 @@ class GameOverState extends FlxState
 	private var gameOver:FlxText;	
 	private var scoreTxt:FlxText;
 	private var highScoreTxt:FlxText;
-	private var messageTxt:FlxText;
-	private var replay:FlxButton;
 	private var _score:Int;
 	private var _victory:Bool;
+	private var replayText:FlxText;
+	private var optionPointer:FlxSprite;
+	private var granyan:FlxSprite;
 	
 	public function new(victory:Bool) 
 	{
@@ -34,22 +35,32 @@ class GameOverState extends FlxState
 	override public function create():Void
 	{
 		super.create();
-		
+
 		gameOver = new FlxText(20, 50, 0, null, 20);
+		
+		granyan = new FlxSprite();
+		
 		if (_victory)
 		{
 			gameOver.text = "A WINNER IS YOU!";
+			granyan.loadGraphic(AssetPaths.GranyanDefeated__png);
 		}
 		else
 		{
 			gameOver.text = "GAME OVER";
+			granyan.loadGraphic(AssetPaths.Granyan__png, true, 32, 32);
+			granyan.animation.add("titleAnimation", [0, 1], 5, true);
+			granyan.animation.play("titleAnimation");
 		}
 		gameOver.alignment = CENTER;
 		gameOver.screenCenter(X);
 		gameOver.color = 0xFFc300ff;
 		
-
 		add(gameOver);
+		
+		granyan.x = (FlxG.width / 2) - granyan.width / 2 ;
+		granyan.y = 120;
+		add(granyan);
 		
 		scoreTxt = new FlxText(0, 80, 0, "Score : " + Reg.score, 12);
 		scoreTxt.alignment = CENTER;
@@ -62,11 +73,26 @@ class GameOverState extends FlxState
 		highScoreTxt.screenCenter(X);
 		highScoreTxt.color = 0xFFc300ff;
 		add(highScoreTxt);
-
-		replay = new FlxButton(0, 0, "Replay", Restart);
-		replay.x = (FlxG.width / 2) - (replay.width / 2);
-		replay.y = FlxG.height - replay.height - 10;
-		add(replay);
+		
+		replayText = new FlxText(0, 0, "REPLAY");
+		replayText.x = (FlxG.width / 2) - (replayText.width / 2);
+		replayText.y = FlxG.height - replayText.height - 10;
+		add(replayText);
+		
+		optionPointer = new FlxSprite();
+		optionPointer.loadGraphic(AssetPaths.Nave__png);
+		optionPointer.x = replayText.x - optionPointer.width - 5;
+		optionPointer.y = replayText.y - 1;
+		add(optionPointer);
+	}
+	
+	override public function update(elapsed:Float):Void
+	{
+		if (FlxG.keys.justPressed.ENTER)
+		{
+			Restart();
+		}
+		super.update(elapsed);
 	}
 	
 	private function Restart():Void

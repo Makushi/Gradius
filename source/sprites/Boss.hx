@@ -10,6 +10,7 @@ import flixel.tweens.FlxEase;
 import flixel.ui.FlxBar;
 import flixel.math.FlxVelocity;
 import flixel.math.FlxPoint;
+import flixel.system.FlxSound;
 import sprites.Bullet;
 import states.GameOverState;
 
@@ -23,6 +24,7 @@ class Boss extends FlxSprite
 	public var hp:Int = 10000;
 	public var pointValue:Int = 10000;
 	public var bullets:FlxTypedGroup<Bullet>;
+	private var bossDamageSound:FlxSound;
 	private var firingTimer:FlxTimer;
 	public var hpBar:FlxBar;
 
@@ -44,12 +46,14 @@ class Boss extends FlxSprite
 		hpBar.createFilledBar(0xFF8e0000, 0xFFFF0000);
 		hpBar.setRange(0, hp);
 		hpBar.value = hp;
+		bossDamageSound = FlxG.sound.load(AssetPaths.BossHurt__wav);
 	}
 	
 	public function Damage()
 	{
 		hp -= 500;
 		hpBar.value = hp;
+		bossDamageSound.play();
 		if (hp <= 0)
 		{
 			FlxG.switchState(new GameOverState(true));

@@ -24,8 +24,8 @@ class AssetData {
 			type.set ("assets/data/level2.oel", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/images/bg.png", "assets/images/bg.png");
 			type.set ("assets/images/bg.png", Reflect.field (AssetType, "image".toUpperCase ()));
-			path.set ("assets/images/BulletMultiDire.png", "assets/images/BulletMultiDire.png");
-			type.set ("assets/images/BulletMultiDire.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/Bullet.png", "assets/images/Bullet.png");
+			type.set ("assets/images/Bullet.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/Ene1.png", "assets/images/Ene1.png");
 			type.set ("assets/images/Ene1.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/Ene2.png", "assets/images/Ene2.png");
@@ -36,6 +36,8 @@ class AssetData {
 			type.set ("assets/images/Ene4.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/Granyan.png", "assets/images/Granyan.png");
 			type.set ("assets/images/Granyan.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/GranyanDefeated.png", "assets/images/GranyanDefeated.png");
+			type.set ("assets/images/GranyanDefeated.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/Missile.png", "assets/images/Missile.png");
 			type.set ("assets/images/Missile.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/Nave.png", "assets/images/Nave.png");
@@ -50,6 +52,18 @@ class AssetData {
 			type.set ("assets/images/Up.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/UpBar.png", "assets/images/UpBar.png");
 			type.set ("assets/images/UpBar.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/sounds/ActivatePowerUp.wav", "assets/sounds/ActivatePowerUp.wav");
+			type.set ("assets/sounds/ActivatePowerUp.wav", Reflect.field (AssetType, "sound".toUpperCase ()));
+			path.set ("assets/sounds/BossHurt.wav", "assets/sounds/BossHurt.wav");
+			type.set ("assets/sounds/BossHurt.wav", Reflect.field (AssetType, "sound".toUpperCase ()));
+			path.set ("assets/sounds/Explosion.wav", "assets/sounds/Explosion.wav");
+			type.set ("assets/sounds/Explosion.wav", Reflect.field (AssetType, "sound".toUpperCase ()));
+			path.set ("assets/sounds/Powerup.wav", "assets/sounds/Powerup.wav");
+			type.set ("assets/sounds/Powerup.wav", Reflect.field (AssetType, "sound".toUpperCase ()));
+			path.set ("assets/sounds/Shoot.wav", "assets/sounds/Shoot.wav");
+			type.set ("assets/sounds/Shoot.wav", Reflect.field (AssetType, "sound".toUpperCase ()));
+			path.set ("assets/sounds/ThemeSong.wav", "assets/sounds/ThemeSong.wav");
+			type.set ("assets/sounds/ThemeSong.wav", Reflect.field (AssetType, "sound".toUpperCase ()));
 			path.set ("flixel/sounds/beep.ogg", "flixel/sounds/beep.ogg");
 			type.set ("flixel/sounds/beep.ogg", Reflect.field (AssetType, "sound".toUpperCase ()));
 			path.set ("flixel/sounds/flixel.ogg", "flixel/sounds/flixel.ogg");
