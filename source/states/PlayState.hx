@@ -85,14 +85,14 @@ class PlayState extends FlxState
 		
 		FlxG.worldBounds.set(0, 0, mapTiles.width, mapTiles.height);
 				
-		scoreText = new FlxText(90, Reg.ScreenHeight - 20, "Score : " + Reg.score);
+		scoreText = new FlxText(80, Reg.ScreenHeight - 20, "Score : " + Reg.score);
 		add(scoreText);
-		highScoreText = new FlxText(150, Reg.ScreenHeight - 20, "HighScore : " + Reg.highScore);
+		highScoreText = new FlxText(170, Reg.ScreenHeight - 20, "HighScore : " + Reg.highScore);
 		add(highScoreText);
-		livesCounter = new FlxText(10, Reg.ScreenHeight - 20, " Lives : " + Reg.playerLives);
+		livesCounter = new FlxText(20, Reg.ScreenHeight - 20, " Lives : " + Reg.playerLives);
 		add(livesCounter);
 		
-		Reg.ub = new UpBar(64, 2);
+		Reg.ub = new UpBar(FlxG.width - 175, 2);
 		add(Reg.ub);
 
 		turretFireTimer = new FlxTimer();
