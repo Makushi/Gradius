@@ -34,7 +34,7 @@ class MenuState extends FlxState
 		instructionsTxt.screenCenter(X);
 		add(instructionsTxt);
 	   
-		playText = new FlxText(0, 0, "PLAY");
+		playText = new FlxText(0, 0, 0,"PLAY", 8, true);
 		playText.x = (FlxG.width / 2) - (playText.width / 2);
 		playText.y = FlxG.height - playText.height - 10;
 		add(playText);

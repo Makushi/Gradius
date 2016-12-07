@@ -32,8 +32,8 @@ class Player extends FlxSprite
 		super(X, Y);
 		loadGraphic(AssetPaths.Nave__png,false,16,16);
 		bullets = playerBullets;
-		bulletSound = FlxG.sound.load(AssetPaths.Shoot__wav);
-		powerUpActivationSound = FlxG.sound.load(AssetPaths.ActivatePowerUp__wav);
+		bulletSound = FlxG.sound.load(AssetPaths.Shoot__ogg);
+		powerUpActivationSound = FlxG.sound.load(AssetPaths.ActivatePowerUp__ogg);
 	}
 	
 	override public function update(elapsed:Float):Void 

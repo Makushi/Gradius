@@ -46,7 +46,7 @@ class Boss extends FlxSprite
 		hpBar.createFilledBar(0xFF8e0000, 0xFFFF0000);
 		hpBar.setRange(0, hp);
 		hpBar.value = hp;
-		bossDamageSound = FlxG.sound.load(AssetPaths.BossHurt__wav);
+		bossDamageSound = FlxG.sound.load(AssetPaths.BossHurt__ogg);
 	}
 	
 	public function Damage()

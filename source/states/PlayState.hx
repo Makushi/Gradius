@@ -49,9 +49,9 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		super.create();
-		themeSong = FlxG.sound.load(AssetPaths.ThemeSong__wav, 1, true);
+		themeSong = FlxG.sound.load(AssetPaths.ThemeSong__ogg, 1, true);
 		themeSong.play();
-		powerUpSound = FlxG.sound.load(AssetPaths.Powerup__wav);
+		powerUpSound = FlxG.sound.load(AssetPaths.Powerup__ogg);
 		var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.level2__oel);
 		
 		mapTiles = loader.loadTilemap(AssetPaths.tileset__png , 16, 16, "tiles");
@@ -85,11 +85,11 @@ class PlayState extends FlxState
 		
 		FlxG.worldBounds.set(0, 0, mapTiles.width, mapTiles.height);
 				
-		scoreText = new FlxText(80, Reg.ScreenHeight - 20, "Score : " + Reg.score);
+		scoreText = new FlxText(80, Reg.ScreenHeight - 20, 0,"Score : " + Reg.score,8,true);
 		add(scoreText);
-		highScoreText = new FlxText(170, Reg.ScreenHeight - 20, "HighScore : " + Reg.highScore);
+		highScoreText = new FlxText(170, Reg.ScreenHeight - 20, 0, "HighScore : " + Reg.highScore, 8, true);
 		add(highScoreText);
-		livesCounter = new FlxText(20, Reg.ScreenHeight - 20, " Lives : " + Reg.playerLives);
+		livesCounter = new FlxText(20, Reg.ScreenHeight - 20, 0," Lives : " + Reg.playerLives, 8, true);
 		add(livesCounter);
 		
 		Reg.ub = new UpBar(FlxG.width - 175, 2);
@@ -443,7 +443,7 @@ class PlayState extends FlxState
 				scroll = false;
 				boss.revive();
 				add(boss.hpBar);		
-				var hpBarText:FlxText = new FlxText(boss.x - 80, boss.y + 168, "BOSS");
+				var hpBarText:FlxText = new FlxText(boss.x - 80, boss.y + 168, 0, "BOSS", 8, true);
 				add(hpBarText);
 			}
 			else
